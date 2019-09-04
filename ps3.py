@@ -363,7 +363,28 @@ def substitute_hand(hand, letter):
     returns: dictionary (string -> int)
     """
     
-    pass  # TO DO... Remove this line when you implement this function
+    if hand.contains(letter):
+        #make sure the frequency is saved
+        freq = hand[letter]
+        #remove the selected letter
+        hand.pop(letter)
+        #decide whether to choose a vowel or consonant
+        temp = randint(0,2)
+        if temp == 0:
+            newLetter = VOWELS[randint(0,len(VOWELS))]
+            while hand.contains(newLetter):
+                newLetter = VOWELS[randint(0,len(VOWELS))]
+            #get random vowel
+            #pop said vowel with given freq into the dict
+        if temp == 1:
+            newLetter = CONSONANTS[randint(0, len(CONSONANTS))]
+            while hand.contains(newLetter):
+                newLetter = CONSONANTS[randint(0,len(VOWELS))]
+            #get random consonant
+            #pop said consonant with given freq into the dict
+        #add the randomly selected letter with the previous letters freq
+        hand.update({newLetter : freq})
+    
        
     
 def play_game(word_list):
