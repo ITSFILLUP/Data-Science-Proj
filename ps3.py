@@ -5,7 +5,7 @@
 #
 # Name          : Philip Nguyen
 # Collaborators : Isaiah Kremer
-# Time spent    : A few hours spread throughout the week
+# Time spent    : A few hours spread throughout the week, about 10+ hours, spent together + separately
 
 # Testing our code: our code passes all the tests given in the test case, as well as the ones in the pdf
 # and we tested all of the functions that we did separately and all passed 
