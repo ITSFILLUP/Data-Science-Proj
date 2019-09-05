@@ -96,20 +96,28 @@ def get_word_score(word, n):
     """    
     
     
+    #component 1
     comp1 = int(0)
+    #component 2
     comp2 = int(0)
+    #word score
     score = int(0)
+    #turn input into lowercase
     lowerWord = word.lower()
+    #word lentgth
     wordLen = len(lowerWord)
+    #current hand length
     currentHandLen = n
-    
+    #for each letter in the given word
     for letter in lowerWord:
+        #append the letter values
         comp1 += SCRABBLE_LETTER_VALUES[letter]
-        
+    #calculate second component
     comp2 = (7*wordLen - 3 *(currentHandLen-wordLen))
+    #decide which to use
     if comp2 < 1:
         comp2 = 1
-        
+    #update score    
     score = comp1*comp2
     
     return score
@@ -190,9 +198,11 @@ def update_hand(hand, word):
     returns: dictionary (string -> int)
     """
     
+    #create a copy of the given hand
     copy = hand.copy()
+    #make the word parameter lowercase
     word = word.lower()
-    
+    #remove each letter in the word from the copy of hand
     for letter in word:
         copy[letter] = copy[letter] - 1
             
@@ -376,21 +386,22 @@ def substitute_hand(hand, letter):
         tempList = [1, 2]
         temp = random.choice(tempList)
         if temp == 1:
+            #get random vowel
             newLetter = random.choice(VOWELS)
             while newLetter in hand:
                 newLetter = random.choice(VOWELS)
+            #push said vowel with given freq into the dict
             hand.update({newLetter : freq})
-            #get random vowel
-            #pop said vowel with given freq into the dict
         if temp == 2:
+            #get random consonant
             newLetter = random.choice(CONSONANTS)
             while newLetter in hand:
                 newLetter = random.choice(CONSONANTS)
+            #push said consonant with given freq into the dict
             hand.update({newLetter : freq})
-            #get random consonant
-            #pop said consonant with given freq into the dict
-        #add the randomly selected letter with the previous letters freq
+        
     else:
+        #Letter not found in the hand
         print("This letter is not in the hand")
     return hand
     
