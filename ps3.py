@@ -213,17 +213,17 @@ def is_valid_word(word, hand, word_list):
     word_hand = get_frequency_dict(word_lower) # get the hand from the word
     in_hand = False
     
-    if "*" not in word_lower:
+    if "*" not in word_lower: # wildcard
         for letter in word_hand:
             if word_hand[letter] > hand.get(letter, 0): # Check if letters in word are in hand, Do not return None from hand
                 return False
-        if word_lower in word_list:
+        if word_lower in word_list: # if word in list then change boolean to true
             in_hand = True
     
     
-    elif "*" in word_lower:
-        for vowel in range(len(VOWELS)):
-            if word_lower.replace("*", VOWELS[vowel]) in word_list:
+    elif "*" in word_lower: #no wildcard
+        for vowel in range(len(VOWELS)): 
+            if word_lower.replace("*", VOWELS[vowel]) in word_list: # for vowels replace with wildcard is in list
                 word_hand = get_frequency_dict(word_lower) # get the hand from the word
                 for letter in word_hand:
                     if word_hand[letter] > hand.get(letter, 0): # Check if letters in word are in hand, Do not return None from hand
@@ -243,13 +243,13 @@ def calculate_handlen(hand):
     returns: integer
     """
     
-    num_each_letter = list(hand.values())
+    num_each_letter = list(hand.values()) # get hand values and change them to a list
     total = 0
     
     for num in range(len(num_each_letter)):
-        total = total + num_each_letter[num]
+        total = total + num_each_letter[num] # for the range add each index number to total
     
-    return int(total)
+    return int(total) # return total
 
 def play_hand(hand, word_list):
 
@@ -290,7 +290,7 @@ def play_hand(hand, word_list):
         # Display the hand
         # on the same line
         # look at display_hand and test cases
-        print ("Current hand: ", end= " "), display_hand(hand)
+        print ("Current hand: ", end= " "), display_hand(hand) # print on one line
         
         # Ask user for input
         user_input = str.lower(input("Enter word, or '!!' to indicate that you are finished: "))
@@ -424,52 +424,52 @@ def play_game(word_list):
     word_list: list of lowercase strings
     """
     
-    total_score = 0
-    sub_count = 1
-    replay_count = 1
+    total_score = 0 
+    sub_count = 1 # substitute count to not substitute again
+    replay_count = 1 # replay count to not replay again
     num_hands = int(input("Enter total number of hands: "))
     while num_hands != 0:
-        current_hand = deal_hand(HAND_SIZE)
-        print("Current hand: ", end=" "), display_hand(current_hand)
-        if sub_count == 1:
+        current_hand = deal_hand(HAND_SIZE) # deal current hand
+        print("Current hand: ", end=" "), display_hand(current_hand) # print on one line
+        if sub_count == 1: #only one substitution
             sub = input("Would you like to substitute a letter? ")
-        if sub_count == 1 and sub == "yes":
+        if sub_count == 1 and sub == "yes": # if sub is yes
             sub_letter = input("Which letter would you like to replace? ")
-            current_hand = substitute_hand(current_hand, sub_letter)
-            score1 = play_hand(current_hand, word_list)
+            current_hand = substitute_hand(current_hand, sub_letter) # substitute and replace current hand
+            score1 = play_hand(current_hand, word_list) #play and keep the score
             print("----------")
-            if replay_count == 1:
+            if replay_count == 1: #only one replay
                 replay = input("Would you like to replay the hand? ")
-            if replay_count == 1 and replay == "yes":
+            if replay_count == 1 and replay == "yes": # replay is yes
                 #do something
-                score2 = play_hand(current_hand, word_list)
+                score2 = play_hand(current_hand, word_list) #play and keep the score of next hand
                 replay_count -= 1
                 if score1 > score2:
-                    total_score = total_score + score1
+                    total_score = total_score + score1 #if hand one is better take it
                     sub_count -= 1
                 else:
-                    total_score = total_score + score2
+                    total_score = total_score + score2 #else hand two is better take it
                     sub_count -= 1
             if replay == "no":
-                total_score = total_score + score1
+                total_score = total_score + score1 #replay is no, add initial hand
                     
         else: # sub_count is 0 or sub is "no"
-            score3 = play_hand(current_hand, word_list)
+            score3 = play_hand(current_hand, word_list) #play and keep score
             print("----------")
             if replay_count == 1:
                 replay = input("Would you like to replay the hand? ")
-            if replay_count == 1 and replay == "yes":
+            if replay_count == 1 and replay == "yes": #replay is yes
                 #do something
-                score4 = play_hand(current_hand, word_list)
+                score4 = play_hand(current_hand, word_list) #play and keep score of next hand
                 replay_count -= 1
                 if score3 > score4:
-                    total_score = total_score + score3
+                    total_score = total_score + score3 #if hand one is better take it
                     sub_count -= 1
                 else:
-                    total_score = total_score + score4
+                    total_score = total_score + score4 #else hand two is better take it
                     sub_count -= 1
             if replay == "no":
-                total_score = total_score + score3
+                total_score = total_score + score3 #replay is no, add initial hand
         num_hands -= 1
     
     print("----------")
