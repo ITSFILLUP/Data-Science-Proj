@@ -5,7 +5,10 @@
 #
 # Name          : Philip Nguyen
 # Collaborators : Isaiah Kremer
-# Time spent    : <total time>
+# Time spent    : A few hours spread throughout the week
+
+# Testing our code: our code passes all the tests given in the test case, as well as the ones in the pdf
+# and we tested all of the functions that we did separately and all passed 
 
 import math
 import random
